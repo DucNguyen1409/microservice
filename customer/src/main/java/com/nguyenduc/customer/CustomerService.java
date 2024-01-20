@@ -23,12 +23,12 @@ public class CustomerService {
         // TODO: check if email not taken
         customerRepository.saveAndFlush(customer); // if not flush the ID will NULL
         FraudCheckResponse checkResponse = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                "http://FRAUD/api/v1/fraud-check/{customerId}",
                 FraudCheckResponse.class,
                 customer.getId()
         );
 
-        if(checkResponse.isFraudster()) {
+        if (checkResponse.isFraudster()) {
             throw new IllegalStateException("fraudster");
         }
 
